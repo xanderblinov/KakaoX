@@ -43,14 +43,14 @@ marathon {
     //ignoreFailures = false
     //fallbackToScreenshots = false
 
-    analytics {
+    /*analytics {
         influx {
             url = "http://localhost:8086"
             user = "root"
             password = "root"
             dbName = "marathon"
         }
-    }
+    }*/
 
     batchingStrategy {
         fixedSize {
