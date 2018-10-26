@@ -18,7 +18,7 @@ import java.util.*
 class SelectTabTest {
 
     companion object {
-        const val DURATION_IN_MS = 3000L
+        const val DURATION_IN_MS = 500L
     }
 
     @Rule
