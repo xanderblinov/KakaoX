@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:text="Hello"
+            android:layout_height="0dp"
+            android:layout_weight="1" tools:ignore="HardcodedText"/>
+
+    <ru.hh.android.kakaox.CollapsedView
+            android:id="@+id/activity_main_collapsed_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+            android:id="@+id/fragment_main_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?android:windowBackground"/>
+</LinearLayout>

@@ -1,0 +1,116 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'marathon'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "ru.hh.android.kakaox"
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+
+/*
+import com.malinskiy.marathon.FilteringPluginConfiguration
+import com.malinskiy.marathon.execution.SimpleClassnameFilter
+*/
+import java.time.Instant
+import java.time.temporal.ChronoUnit
+
+
+marathon {
+    name = "TestName"
+    //testPackage = "com.example"
+
+    //ignoreFailures = false
+    //fallbackToScreenshots = false
+
+    analytics {
+        influx {
+            url = "http://localhost:8086"
+            user = "root"
+            password = "root"
+            dbName = "marathon"
+        }
+    }
+
+    batchingStrategy {
+        fixedSize {
+            size = 1
+        }
+    }
+
+    flakinessStrategy {
+        probabilityBased {
+            minSuccessRate = 0.8
+            maxCount = 3
+            timeLimit = Instant.now().minus(7, ChronoUnit.DAYS)
+        }
+    }
+
+    retryStrategy {
+        fixedQuota {
+            totalAllowedRetryQuota = 200
+            retryPerTestQuota = 3
+        }
+    }
+
+    sortingStrategy {
+        executionTime {
+            percentile = 90.0
+            timeLimit = Instant.now().minus(30, ChronoUnit.DAYS)
+        }
+    }
+
+    /*filteringConfiguration {
+        whitelist {
+            add(SimpleClassnameFilter(".*".toRegex()))
+        }
+        blacklist {
+            add(SimpleClassnameFilter('$^'.toRegex()))
+        }
+    }*/
+
+    testClassRegexes = []
+    //includedTestAnnotations = []
+//    excludedTestAnnotations = []
+    includeSerialRegexes = []
+    excludeSerialRegexes = []
+
+    autoGrantPermission = true
+    testOutputTimeoutMillis = 120000
+    debug = true
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.agoda.kakao:kakao:1.4.0'
+
+}
