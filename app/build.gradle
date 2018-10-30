@@ -45,7 +45,7 @@ marathon {
 
     analytics {
         influx {
-            url = "magneto.pyn.ru:8086"//"http://localhost:8086"
+            url = "http://magneto.pyn.ru:8086"//"http://localhost:8086"
             user = "root"
             password = "root"
             dbName = "marathon"
