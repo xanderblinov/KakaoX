@@ -43,14 +43,14 @@ marathon {
     //ignoreFailures = false
     //fallbackToScreenshots = false
 
-    /*analytics {
+    analytics {
         influx {
-            url = "http://localhost:8086"
+            url = "magneto.pyn.ru:8086"//"http://localhost:8086"
             user = "root"
             password = "root"
             dbName = "marathon"
         }
-    }*/
+    }
 
     batchingStrategy {
         fixedSize {
