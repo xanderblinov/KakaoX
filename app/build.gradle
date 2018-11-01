@@ -69,7 +69,7 @@ marathon {
     retryStrategy {
         fixedQuota {
             totalAllowedRetryQuota = 200
-            retryPerTestQuota = 3
+            retryPerTestQuota = 4
         }
     }
 
