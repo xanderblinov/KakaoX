@@ -25,6 +25,28 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    flavorDimensions "host"
+
+    lintOptions {
+        abortOnError false
+        disable 'InvalidPackage'
+    }
+
+    productFlavors {
+        ru {
+            dimension "host"
+            applicationId = "ru.hh.android.kakaox.ru"
+        }
+        en {
+            dimension "host"
+            applicationId = "ru.hh.android.kakaox.en"
+        }
+        de {
+            dimension "host"
+            applicationId = "ru.hh.android.kakaox.de"
+        }
+    }
 }
 
 
