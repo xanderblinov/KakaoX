@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.tasks.InspectionsTask
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -5,6 +7,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'marathon'
+
+apply plugin: 'org.jetbrains.intellij.inspections'
+
+
+inspections {
+    toolVersion "ideaIC:2018.1"
+    inheritFromIdea = true
+}
 
 android {
     compileSdkVersion 27
@@ -66,12 +76,12 @@ marathon {
     //fallbackToScreenshots = false
 
     analytics {
-        influx {
+        /*influx {
             url = "http://magneto.pyn.ru:8086"//"http://localhost:8086"
             user = "root"
             password = "root"
             dbName = "marathon"
-        }
+        }*/
     }
 
     batchingStrategy {
@@ -135,4 +145,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.agoda.kakao:kakao:1.4.0'
 
+}
+
+task inspections (type: InspectionsTask) {
+
+    description 'Run inspections'
+    group 'verification'
+
+    source = fileTree('src/main/java/')
+    classpath = files()
 }

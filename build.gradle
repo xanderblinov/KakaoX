@@ -9,11 +9,13 @@ buildscript {
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots/'
         }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.malinskiy.marathon:marathon-gradle-plugin:0.3.1"
+        classpath "org.jetbrains.intellij.plugins:inspection-plugin:0.3.0-rc-3"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -31,6 +33,13 @@ buildScan {
 }
 
 allprojects {
+    apply plugin: 'org.jetbrains.intellij.inspections'
+
+    inspections {
+        inheritFromIdea = true
+        idea.version = "ideaIC:2018.2.4"
+    }
+
     repositories {
         google()
         jcenter()
